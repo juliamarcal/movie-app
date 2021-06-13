@@ -1,0 +1,211 @@
+body{background-color: rgb(236, 234, 234);}
+footer{
+    bottom: 0px;
+}
+
+.tudo{max-width: inherit;}
+
+/* Inicio - elementos do header*/
+.elementos_header{
+    background-color: rgb(39, 39, 39);
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+}
+.logo{width: 80px;}
+
+
+/* Barra de pesquisa */
+.form-control{
+    width: 100%;
+    margin-right: 5px;
+}
+.barra_de_pesquisa nav{
+    float: right;
+}
+.barra_de_pesquisa{
+    padding-top: 20px;
+}
+.btn-outline-success:hover{background-color: purple;}
+.btn-outline-success {
+    color: purple;
+    border-color: purple;
+}
+.navbar button{color: cyan;}
+/* Barra de pesquisa*/
+
+/* botao voltar para a home */
+.voltar a{
+    border-radius: 50%;
+    border-color: purple;
+    padding: 10px;
+    color: cyan;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    float: right;
+    margin-top: 20px;
+    margin-right: 1%;
+}
+.voltar a:hover{
+    background-color: purple;
+    border-color: cyan;
+}
+/* fim - elementos do header*/
+
+
+
+
+
+/* inicio - elementos main */
+.poster img{
+    width: 200px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+.info p{
+    text-align: center;
+    margin-top: 10px;
+}
+.info{
+    background-color: rgb(194, 191, 191);
+    padding: 10px;
+    padding-top: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+}
+.texto{
+    background-color: rgba(107, 106, 106, 0.096);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 40px;
+}
+.titulo{
+    text-align: center;
+}
+main{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+
+/* fim - elementos main */
+
+
+
+
+
+
+
+/* inicio - elementos do footer*/
+    .rodape{
+        background-color: rgb(39, 39, 39);
+        border-top-left-radius: 10px;
+        border-top-Right-radius: 10px;
+        padding: 10px;
+    }
+
+    .copyright{
+        color: rgb(104, 104, 104);
+        text-align-last: center;
+        font-size: 10px;
+        padding-top: 10px;
+    }
+
+    .logo2{
+        max-block-size: 40px;
+        display: table-cell;
+        padding-top: 10px;
+        float: right
+    }
+
+    .redes_sociais{
+        padding: 10px;
+        padding-left: 40px;
+    }
+
+    .redes_sociais a{
+        padding-left: 5px;
+        color: rgb(104, 104, 104);
+    }
+    .redes_sociais a:hover{color: rgb(216, 214, 214);}
+
+    
+/* fim - elementos do footer*/
+
+
+
+
+/* inicio - breaing points e media queries - tablet*/
+@media screen and (min-width:601px) and (max-width:1199px){
+    html{width: 100%;}
+    
+    .poster img{
+        width: 150px;
+        height: 250px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+    }
+
+
+
+}/* Fim - breaing points e media queries - tablet*/
+
+
+
+
+
+
+
+/* inicio - breaing points e media queries - mobile*/
+@media screen and (max-width: 600px){ /*mobile*/
+
+    html{width: 100%;}
+
+    .tudo{width: 100%;}
+
+    h1{font-size: 25px;}
+
+    h2{font-size: 20px;}
+    
+    .info{
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .texto{
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    
+    
+
+
+
+/* inicio - footer*/
+    .redes_sociais{
+        text-align: center;
+    }
+    .copyright{
+        text-align: center;
+    }
+/* fim - footer*/
+
+
+/*inicio - mobile small*/
+    @media screen and (max-width: 380px){
+        
+    }/*fim - mobile small*/
+}/* fim - breaing points e media queries - mobile*/
