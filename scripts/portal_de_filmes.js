@@ -1,13 +1,173 @@
 const API_KEY = '4aec08d6a063f531b3aa5dfd47796e60';
+const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const populares = document.getElementById('filmes_populares');
+const lancamentos = document.getElementById('filmes_lancamentos');
+const aclamados_criticas = document.getElementById('filmes_aclamados_pela_critica');
+const mais_info = document.getElementById("mais_info");
+
+//Pegar dados da API DMDB
+
+//filmes lançamentos
+pegar_filmes_lancamentos("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&primary_release_year=2021&with_watch_monetization_types=flatrate");
+
+function pegar_filmes_lancamentos(url){
+ fetch(url).then(res => res.json()).then(data => {
+        console.log(data.results);
+     mostrar_filmes_lancamentos(data.results);
+ })
+}
+
+function mostrar_filmes_lancamentos(data){
+    lancamentos.innerHTML = '';
+
+    data.forEach(movie => {
+        const{poster_path, id} = movie;
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('item');
+        movieEl.innerHTML = `
+        <div class="pad15">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
+        </div>
+        `
+        lancamentos.appendChild(movieEl);
+        
+    })
+}
+
+
+//filmes populares
+pegar_filmes_aclamados_pela_critica("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+
+function pegar_filmes_aclamados_pela_critica(url){
+ fetch(url).then(res => res.json()).then(data => {
+        console.log(data.results);
+     mostrar_filmes_aclamados_pela_critica(data.results);
+ })
+}
+
+function mostrar_filmes_aclamados_pela_critica(data){
+    aclamados_criticas.innerHTML = '';
+
+    data.forEach(movie => {
+        const{poster_path} = movie;
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('item');
+        movieEl.innerHTML = `
+        <div class="pad15">
+            <img src="${IMG_URL + poster_path}" alt="" onclick="togglePopup()">
+        </div>
+        `
+        aclamados_criticas.appendChild(movieEl);
+        
+    })
+}
+
+
+//aclamdos pela critica
+pegar_filmes_populares("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+
+function pegar_filmes_populares(url){
+ fetch(url).then(res => res.json()).then(data => {
+        console.log(data.results);
+     mostrar_filmes_populares(data.results);
+ })
+}
+
+function mostrar_filmes_populares(data){
+    populares.innerHTML = '';
+
+    data.forEach(movie => {
+        const{poster_path} = movie;
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('item');
+        movieEl.innerHTML = `
+        <div class="pad15">
+            <img src="${IMG_URL + poster_path}" alt="" onclick="togglePopup()">
+        </div>
+        `
+        populares.appendChild(movieEl);
+        
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 //pop-up texto posters
-function togglePopup(){
+function togglePopup(id_filme){
     document.getElementById("popup-1").classList.toggle("active");
+    pegar_info_filme_clicado("https://api.themoviedb.org/3/movie/"+id_filme+"?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br");
   }
-//pegar info da API
+
+function pegar_info_filme_clicado(url){
+    fetch(url).then(res => res.json()).then(data => {
+        console.log(data.results);
+     mostar_mais_info(data.results);
+ })
+}
+
+function mostrar_mais_info(data){
+    mais_info.innerHTML = '';
+
+    data(movie => {
+        const{title, overview, vote_average} = movie;
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('item');
+        movieEl.innerHTML = `
+        <div class="popup" id="popup-1">
+        <div class="overlay"></div>
+        <div class="content">
+        <div class="close-btn" onclick="togglePopup()">×</div>
+        <h1>${title}</h1>
+            <p><b>Avaliação: </b>${vote_average}</p>
+            <p><b>Descrição: </b>${overview}</p>
+        <a href="filme_escolhido.html">leia mais ...</a>
+      </div>
+    </div>
+        `
+        mais_info.appendChild(movieEl);
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
