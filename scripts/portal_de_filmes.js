@@ -4,6 +4,7 @@ const populares = document.getElementById('filmes_populares');
 const lancamentos = document.getElementById('filmes_lancamentos');
 const aclamados_criticas = document.getElementById('filmes_aclamados_pela_critica');
 const mais_info = document.getElementById("mais_info");
+const filme_escolhido = document.getElementById("filme_escolhido_conteudo");
 
 //Pegar dados da API DMDB
 
@@ -49,12 +50,12 @@ function mostrar_filmes_aclamados_pela_critica(data){
     aclamados_criticas.innerHTML = '';
 
     data.forEach(movie => {
-        const{poster_path} = movie;
+        const{poster_path, id} = movie;
         const movieEl = document.createElement(`div`);
         movieEl.classList.add('item');
         movieEl.innerHTML = `
         <div class="pad15">
-            <img src="${IMG_URL + poster_path}" alt="" onclick="togglePopup()">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
         </div>
         `
         aclamados_criticas.appendChild(movieEl);
@@ -77,12 +78,12 @@ function mostrar_filmes_populares(data){
     populares.innerHTML = '';
 
     data.forEach(movie => {
-        const{poster_path} = movie;
+        const{poster_path, id} = movie;
         const movieEl = document.createElement(`div`);
         movieEl.classList.add('item');
         movieEl.innerHTML = `
         <div class="pad15">
-            <img src="${IMG_URL + poster_path}" alt="" onclick="togglePopup()">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
         </div>
         `
         populares.appendChild(movieEl);
@@ -92,79 +93,101 @@ function mostrar_filmes_populares(data){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //pop-up texto posters
-function togglePopup(id_filme){
+function togglePopup(id){
     document.getElementById("popup-1").classList.toggle("active");
-    pegar_info_filme_clicado("https://api.themoviedb.org/3/movie/"+id_filme+"?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br");
+    var filme_id = id;
+    //descobre_url(filme_id);
   }
 
-function pegar_info_filme_clicado(url){
+function descobre_url(id){
+    const URL_textos = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`
+    console.log(URL_textos);//está imprimindo ok
+    pegar_info_filme_clicado(URL_textos);
+}
+
+function pegar_info_filme_clicado(url){//recebe o URL ok
     fetch(url).then(res => res.json()).then(data => {
-        console.log(data.results);
-     mostar_mais_info(data.results);
+        console.log("data.results: "+data.results);
+     mostrar_info(data.results);
  })
 }
 
-function mostrar_mais_info(data){
+function mostrar_info(data){
     mais_info.innerHTML = '';
-
-    data(movie => {
-        const{title, overview, vote_average} = movie;
+    console.log("dados mostrar info: "+data);//undefined
+        
+    data.forEach(movie => {
+        const{poster_path, id} = movie;
         const movieEl = document.createElement(`div`);
         movieEl.classList.add('item');
         movieEl.innerHTML = `
-        <div class="popup" id="popup-1">
-        <div class="overlay"></div>
-        <div class="content">
-        <div class="close-btn" onclick="togglePopup()">×</div>
-        <h1>${title}</h1>
-            <p><b>Avaliação: </b>${vote_average}</p>
-            <p><b>Descrição: </b>${overview}</p>
-        <a href="filme_escolhido.html">leia mais ...</a>
-      </div>
-    </div>
+            <div class="popup" id="popup-1">
+                <div class="overlay"></div>
+                <div class="content">
+                <div class="close-btn" onclick="togglePopup()">×</div>
+                <h1>${data.title}</h1>
+                <p><b>Avaliação: </b>${data.vote_average}</p>
+                <p><b>Descrição: </b>${data.overview}</p>
+                <a href="filme_escolhido.html id=${data.id}" onclick ="passar_filme_escolhido(id)">leia mais ...</a>
+                </div>
+            </div>
         `
-        mais_info.appendChild(movieEl);
     })
+        mais_info.appendChild(movieEl);
+    
 }
 
 
 
+//pagina filme escolhido
 
+function passar_filme_escolhido(id){
+    const URL_info = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`
+    console.log(URL_info);//está imprimindo ok
+    pegar_info_filme_escolhido(URL_textos);
+}
 
+function pegar_info_filme_escolhido(url){//recebe o URL ok
+    fetch(url).then(res => res.json()).then(data => {
+        console.log("dados pegar filmes: "+ data.results);//undefined
+        mostrar_filme_escolhido(data.results);
+ })
+}
 
+function mostrar_filme_escolhido(data){
+    filme_escolhido.innerHTML = '';
 
-
-
-
-
-
-
-
-
-
-
-
+        console.log("dados mostrar info: "+data);//undefined
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('row conteudo');
+        movieEl.innerHTML = `
+            <div class="col-12 titulo">
+                <h1>${titulo}</h1>
+            </div>
+            <div class="col-12 col-sm-3 info">
+                <div class="row poster">
+                    <img src="${img}" alt="">
+                </div>
+                <p><b>Direção: </b> ${direção}</p>
+                <p><b>Avaliação: </b> ${avaliação}</p>
+                <p><b>Classificação: </b> ${classificação}</p>
+                <p><b>Estreia: </b>${estreia}</p>
+            </div>
+            <div class="col-12 col-sm-9 texto">
+                <div class="row sinopse">
+                    <h2>Sinópse:</h2>
+                    <p>${sinopse}</p>
+                </div>
+                <div class="row review">
+                    <h2>Review:</h2>
+                    <p>${avaliação}</p>
+                </div>
+            </div>
+        `
+        filme_escolhido.appendChild(movieEl);
+    
+}
 
 
 

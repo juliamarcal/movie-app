@@ -17,22 +17,26 @@ footer{
 
 
 /* Barra de pesquisa */
-.form-control{
+.search{
+    background-color: rgba(133, 19, 133, 0.541);
+    border: 2px solid var(--primary-color);
+    padding:0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    color:#fff;
+    font-family: inherit;
+    max-width: 100%;
     width: 100%;
-    margin-right: 5px;
+    margin-top: 1.5%;
 }
-.barra_de_pesquisa nav{
-    float: right;
+
+.search:focus{
+    outline:0;
 }
-.barra_de_pesquisa{
-    padding-top: 20px;
+
+.search::placeholder{
+    color: cyan;
 }
-.btn-outline-success:hover{background-color: purple;}
-.btn-outline-success {
-    color: purple;
-    border-color: purple;
-}
-.navbar button{color: cyan;}
 /* Barra de pesquisa*/
 
 /* botao voltar para a home */
