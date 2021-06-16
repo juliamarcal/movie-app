@@ -29,6 +29,27 @@
 
 
     <main class="main" id="filme_escolhido_conteudo">
+      <div class="informacoes">
+        <div class="row conteudo">
+      <div class="col-12 titulo">
+            <h1>${data.title}</h1>
+        </div>
+        <div class="col-12 col-sm-3 info">
+            <div class="row poster">
+                <img src="${IMG_URL + data.poster_path}" alt="">
+            </div>
+            <p><b>Avaliação: </b> ${data.vote_avarage}</p>
+            <p><b>Estreia: </b> ${data.release_date}</p>
+            <p><b>Idioma original: </b> ${data.original_language}</p>
+        </div>
+        <div class="col-12 col-sm-9 texto">
+            <div class="row sinopse">
+                <h2>Sinópse:</h2>
+                <p>${data.overview}</p>
+            </div>
+    </div>
+     </div>
+      </div>
      
       
     </main>

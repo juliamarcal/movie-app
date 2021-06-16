@@ -127,7 +127,7 @@ function mostrar_info(data){
                 <h1>${data.title}</h1>
                 <p><b>Avaliação: </b>${data.vote_average}</p>
                 <p><b>Descrição: </b>${data.overview}</p>
-                <a href="filme_escolhido.html" id="${data.id}" onclick ="passar_filme_escolhido(id)">leia mais ...</a>
+                <a href="filme_escolhido.html" id="${data.id}" onclick ="passar_id(id)">leia mais ...</a>
                 </div>
             </div>
         `
@@ -137,49 +137,13 @@ function mostrar_info(data){
     
 }
 
-
+function passar_id(id){
+    var id_filme = id;
+    localStorage.setItem('id_do_filme', id_filme);
+}
 
 //pagina filme escolhido
-function passar_filme_escolhido(id){
-    const URL_info = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`;
-    console.log(URL_info);//está imprimindo ok
-    pegar_info_filme_escolhido(URL_textos);
-}
 
-function pegar_info_filme_escolhido(url){
-    fetch(url).then(res => res.json()).then(data => {
-        mostrar_filme_escolhido(data);
- })
-}
-
-function mostrar_filme_escolhido(data){
-    filme_escolhido.innerHTML = '';
-
-        console.log("dados mostrar info: "+ data);//undefined
-        const movieEl = document.createElement(`div`);
-        movieEl.classList.add('row conteudo');
-        movieEl.innerHTML = `
-            <div class="col-12 titulo">
-                <h1>${data.title}</h1>
-            </div>
-            <div class="col-12 col-sm-3 info">
-                <div class="row poster">
-                    <img src="${IMG_URL + data.poster_path}" alt="">
-                </div>
-                <p><b>Avaliação: </b> ${data.vote_avarage}</p>
-                <p><b>Estreia: </b> ${data.release_date}</p>
-                <p><b>Idioma original: </b> ${data.original_language}</p>
-            </div>
-            <div class="col-12 col-sm-9 texto">
-                <div class="row sinopse">
-                    <h2>Sinópse:</h2>
-                    <p>${data.overview}</p>
-                </div>
-            </div>
-        `
-        filme_escolhido.appendChild(movieEl);
-    
-}
 
 
 
