@@ -6,18 +6,23 @@ const aclamados_criticas = document.getElementById('filmes_aclamados_pela_critic
 const mais_info = document.getElementById("mais_info");
 const filme_escolhido = document.getElementById("filme_escolhido_conteudo");
 
-//Pegar dados da API DMDB
+
+$(document).ready(function abrir_portal_de_filmes(){
+    if((window.location.href) == "http://127.0.0.1:5501/portal_de_filmes.html"){
+        pegar_filmes_lancamentos("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&primary_release_year=2021&with_watch_monetization_types=flatrate");
+        pegar_filmes_aclamados_pela_critica("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+        pegar_filmes_populares("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+    }
+});
+
 
 //filmes lançamentos
-pegar_filmes_lancamentos("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&primary_release_year=2021&with_watch_monetization_types=flatrate");
-
 function pegar_filmes_lancamentos(url){
  fetch(url).then(res => res.json()).then(data => {
         console.log(data.results);
      mostrar_filmes_lancamentos(data.results);
  })
 }
-
 function mostrar_filmes_lancamentos(data){
     lancamentos.innerHTML = '';
 
@@ -27,7 +32,7 @@ function mostrar_filmes_lancamentos(data){
         movieEl.classList.add('item');
         movieEl.innerHTML = `
         <div class="pad15">
-            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="clicar_filme_poster(id)">
         </div>
         `
         lancamentos.appendChild(movieEl);
@@ -37,15 +42,12 @@ function mostrar_filmes_lancamentos(data){
 
 
 //filmes populares
-pegar_filmes_aclamados_pela_critica("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
-
 function pegar_filmes_aclamados_pela_critica(url){
  fetch(url).then(res => res.json()).then(data => {
         console.log(data.results);
      mostrar_filmes_aclamados_pela_critica(data.results);
  })
 }
-
 function mostrar_filmes_aclamados_pela_critica(data){
     aclamados_criticas.innerHTML = '';
 
@@ -55,7 +57,7 @@ function mostrar_filmes_aclamados_pela_critica(data){
         movieEl.classList.add('item');
         movieEl.innerHTML = `
         <div class="pad15">
-            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="clicar_filme_poster(id)">
         </div>
         `
         aclamados_criticas.appendChild(movieEl);
@@ -65,15 +67,12 @@ function mostrar_filmes_aclamados_pela_critica(data){
 
 
 //aclamdos pela critica
-pegar_filmes_populares("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
-
 function pegar_filmes_populares(url){
  fetch(url).then(res => res.json()).then(data => {
         console.log(data.results);
      mostrar_filmes_populares(data.results);
  })
 }
-
 function mostrar_filmes_populares(data){
     populares.innerHTML = '';
 
@@ -83,7 +82,7 @@ function mostrar_filmes_populares(data){
         movieEl.classList.add('item');
         movieEl.innerHTML = `
         <div class="pad15">
-            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="togglePopup(id)">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="clicar_filme_poster(id)">
         </div>
         `
         populares.appendChild(movieEl);
@@ -92,33 +91,32 @@ function mostrar_filmes_populares(data){
 }
 
 
-
 //pop-up texto posters
-function togglePopup(id){
-    document.getElementById("popup-1").classList.toggle("active");
+function clicar_filme_poster(id){
     var filme_id = id;
-    //descobre_url(filme_id);
+    descobre_url (filme_id);    
+}
+
+function togglePopup(){
+    document.getElementById("popup-1").classList.toggle("active");
+    
   }
 
 function descobre_url(id){
-    const URL_textos = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`
-    console.log(URL_textos);//está imprimindo ok
+    var URL_textos = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`;
     pegar_info_filme_clicado(URL_textos);
 }
 
-function pegar_info_filme_clicado(url){//recebe o URL ok
+function pegar_info_filme_clicado(url){
     fetch(url).then(res => res.json()).then(data => {
-        console.log("data.results: "+data.results);
-     mostrar_info(data.results);
+     mostrar_info(data);
  })
 }
 
 function mostrar_info(data){
+
     mais_info.innerHTML = '';
-    console.log("dados mostrar info: "+data);//undefined
         
-    data.forEach(movie => {
-        const{poster_path, id} = movie;
         const movieEl = document.createElement(`div`);
         movieEl.classList.add('item');
         movieEl.innerHTML = `
@@ -129,68 +127,59 @@ function mostrar_info(data){
                 <h1>${data.title}</h1>
                 <p><b>Avaliação: </b>${data.vote_average}</p>
                 <p><b>Descrição: </b>${data.overview}</p>
-                <a href="filme_escolhido.html id=${data.id}" onclick ="passar_filme_escolhido(id)">leia mais ...</a>
+                <a href="filme_escolhido.html" id="${data.id}" onclick ="passar_filme_escolhido(id)">leia mais ...</a>
                 </div>
             </div>
         `
-    })
+    
         mais_info.appendChild(movieEl);
+        togglePopup()
     
 }
 
 
 
 //pagina filme escolhido
-
 function passar_filme_escolhido(id){
-    const URL_info = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`
+    const URL_info = `https://api.themoviedb.org/3/movie/${id}?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br`;
     console.log(URL_info);//está imprimindo ok
     pegar_info_filme_escolhido(URL_textos);
 }
 
-function pegar_info_filme_escolhido(url){//recebe o URL ok
+function pegar_info_filme_escolhido(url){
     fetch(url).then(res => res.json()).then(data => {
-        console.log("dados pegar filmes: "+ data.results);//undefined
-        mostrar_filme_escolhido(data.results);
+        mostrar_filme_escolhido(data);
  })
 }
 
 function mostrar_filme_escolhido(data){
     filme_escolhido.innerHTML = '';
 
-        console.log("dados mostrar info: "+data);//undefined
+        console.log("dados mostrar info: "+ data);//undefined
         const movieEl = document.createElement(`div`);
         movieEl.classList.add('row conteudo');
         movieEl.innerHTML = `
             <div class="col-12 titulo">
-                <h1>${titulo}</h1>
+                <h1>${data.title}</h1>
             </div>
             <div class="col-12 col-sm-3 info">
                 <div class="row poster">
-                    <img src="${img}" alt="">
+                    <img src="${IMG_URL + data.poster_path}" alt="">
                 </div>
-                <p><b>Direção: </b> ${direção}</p>
-                <p><b>Avaliação: </b> ${avaliação}</p>
-                <p><b>Classificação: </b> ${classificação}</p>
-                <p><b>Estreia: </b>${estreia}</p>
+                <p><b>Avaliação: </b> ${data.vote_avarage}</p>
+                <p><b>Estreia: </b> ${data.release_date}</p>
+                <p><b>Idioma original: </b> ${data.original_language}</p>
             </div>
             <div class="col-12 col-sm-9 texto">
                 <div class="row sinopse">
                     <h2>Sinópse:</h2>
-                    <p>${sinopse}</p>
-                </div>
-                <div class="row review">
-                    <h2>Review:</h2>
-                    <p>${avaliação}</p>
+                    <p>${data.overview}</p>
                 </div>
             </div>
         `
         filme_escolhido.appendChild(movieEl);
     
 }
-
-
-
 
 
 
