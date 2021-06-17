@@ -40,8 +40,8 @@ function mostrar_filme_escolhido(data){
                 <p><b>Popularidade: </b> ${data.popularity}</p>
                 <p><b>Estreia: </b> ${data.release_date}</p>
                 <p><b>Idioma original: </b> ${data.original_language}</p>
-                <p><b>Lucro: </b> ${data.revenue}</p>
-                <a href ="https://www.themoviedb.org/movie/${data.id}">Informações retiradas do site The Movie DB</a>
+                <p><b>Lucro: </b>$ ${data.revenue}</p>
+                <a style="text-align: center;" href ="https://www.themoviedb.org/movie/${data.id}">Informações retiradas do site The Movie DB</a>
             </div>
             <div class="col-12 col-sm-8 texto">
                 <div class="col-12 titulo">
