@@ -28,51 +28,50 @@
       </header>
 
 
-    <main class="main" id="filme_escolhido_conteudo">
-      <div class="informacoes">
-        <div class="row conteudo">
-          <div class="col-12 titulo">
-            <h1>${data.title}</h1>
-          </div>
-          <div class="col-12 col-sm-3 info">
-            <div class="row poster">
-                <img src="${IMG_URL + data.poster_path}" alt="">
+    <main class="main" id="main">
+
+      <div id="filme_escolhido_info">
+        <div class="informacoes">
+          <div class="row conteudo">
+            <div class="col-12 titulo">
+              <h1>${data.title}</h1>
             </div>
-            <p><b>Avaliação: </b> ${data.vote_avarage}</p>
-            <p><b>Estreia: </b> ${data.release_date}</p>
-            <p><b>Idioma original: </b> ${data.original_language}</p>
-          </div>
-          <div class="col-12 col-sm-9 texto">
-            <div class="row sinopse">
-                <h2>Sinópse:</h2>
-                <p>${data.overview}</p>
+            <div class="col-12 col-sm-3 info">
+              <div class="row poster">
+                  <img src="${IMG_URL + data.poster_path}" alt="">
+              </div>
+              <p><b>Avaliação: </b> ${data.vote_avarage}</p>
+              <p><b>Estreia: </b> ${data.release_date}</p>
+              <p><b>Idioma original: </b> ${data.original_language}</p>
+            </div>
+            <div class="col-12 col-sm-9 texto">
+              <div class="row sinopse">
+                  <h2>Sinópse:</h2>
+                  <p>${data.overview}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div><!--fim de tudo!-->
-    </div>
+        </div><!--fim de informações!-->
+      </div>
      
+      <div class="avaliacao" >
+          <div class="row">
+            <div class="col-12 titulo">
+              <h1>Avaliação de usuários:</h1>
+            </div>
+            <div class="criar_avaliacoes" id="filme_escolhido_avaliacoes">
+              <div class="avaliacao_item">
+                <div class="col-12">
+                  <p><b>${username}</b> - nota: ${rating}</p>
+                  <p>${content}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      
       
     </main>
-
-
-
-    <footer class="footer">
-        <div class="row rodape">
-          <div class="col-xl-2 col-12 redes_sociais">
-            <a href=""><i class="fab fa-facebook-square"></i></a> <!--facebook!-->
-            <a href=""><i class="fab fa-twitter"></i></a> <!--tweter!-->
-            <a href=""><i class="fab fa-instagram"></i></a> <!--intagram!-->    
-          </div>
-          <div class=" col-xl-9 col-10 copyright">
-            <p>Copiright 2020 - Disciplina de desenvolvimento de interfaces Web - ICEI PUC Minas</p>
-          </div> 
-          <div class="col-xl-1 col-2">
-            <img src="imgs/logo.png" class="logo2">
-          </div>
-        </div>
-      </footer>
-    </div> <!--fim de tudo-->
 
 
 

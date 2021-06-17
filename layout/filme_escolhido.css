@@ -11,7 +11,7 @@ footer{
     padding: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .logo{width: 80px;}
 
@@ -98,9 +98,22 @@ main{
 .opiniao{
     background-color: rgba(107, 106, 106, 0.096);
     border-radius: 10px;
-    
 }
 
+/* avaliações */
+.avaliacao{
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(194, 191, 191);
+}
+
+.avaliacao_item{
+    background-color: rgba(107, 106, 106, 0.514);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
 
 /* fim - elementos main */
 
@@ -110,41 +123,6 @@ main{
 
 
 
-/* inicio - elementos do footer*/
-    .rodape{
-        background-color: rgb(39, 39, 39);
-        border-top-left-radius: 10px;
-        border-top-Right-radius: 10px;
-        padding: 10px;
-    }
-
-    .copyright{
-        color: rgb(104, 104, 104);
-        text-align-last: center;
-        font-size: 10px;
-        padding-top: 10px;
-    }
-
-    .logo2{
-        max-block-size: 40px;
-        display: table-cell;
-        padding-top: 10px;
-        float: right
-    }
-
-    .redes_sociais{
-        padding: 10px;
-        padding-left: 40px;
-    }
-
-    .redes_sociais a{
-        padding-left: 5px;
-        color: rgb(104, 104, 104);
-    }
-    .redes_sociais a:hover{color: rgb(216, 214, 214);}
-
-    
-/* fim - elementos do footer*/
 
 
 
