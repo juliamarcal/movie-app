@@ -113,9 +113,6 @@ footer{
 
 /* Carrousel tipo netflix*/
 
-    
-
-
 
     /* inicio - conteudos*/
     .conteudos{
@@ -280,7 +277,7 @@ footer{
 
 
 /* inicio - breaing points e media queries - mobile*/
-@media screen and (max-width: 600px){ /*mobile*/
+@media screen  and (min-width:381px) and (max-width: 600px){ /*mobile*/
 
     html{width: 100%;}
 
@@ -290,6 +287,8 @@ footer{
 
     h2{font-size: 20px;}
     
+   
+
     .form-control{
         max-width: 70% !important;
     }
@@ -317,15 +316,54 @@ footer{
 
 
 /*inicio - mobile small*/
-    @media screen and (max-width: 380px){
-        /*lançamentos*/
-        .video1 iframe{ /*altera o tamanho do video - carousel*/
-            max-width: 190px;
-            max-height: 125px;
-            margin-bottom: 10px;
-        }
-        .video1{padding-left: 0px;}
-        /*lançamentos*/
-
-    }/*fim - mobile small*/
 }/* fim - breaing points e media queries - mobile*/
+
+@media screen and (max-width: 380px){
+    /*lançamentos*/
+    .video1 iframe{ /*altera o tamanho do video - carousel*/
+        max-width: 190px;
+        max-height: 125px;
+        margin-bottom: 10px;
+    }
+    .video1{padding-left: 0px;}
+    /*lançamentos*/
+
+    html{width: 100%;}
+
+    .tudo{width: 100%;}
+
+    h1{font-size: 25px;}
+
+    h2{font-size: 20px;}
+    
+    
+   
+
+    .form-control{
+        max-width: 70% !important;
+    }
+
+    .content p{
+        font-size: small;
+    }
+
+    .content h1{
+        font-size: large;
+        font-weight: bolder;
+    }
+
+/* inicio - footer*/
+    .redes_sociais{
+        text-align: center;
+    }
+    .copyright{
+        text-align: center;
+    }
+/* fim - footer*/
+.popup .content{
+    width: 90%;
+}
+
+    
+
+}/*fim - mobile small*/
