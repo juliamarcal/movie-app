@@ -5,16 +5,13 @@ const lancamentos = document.getElementById('filmes_lancamentos');
 const aclamados_criticas = document.getElementById('filmes_aclamados_pela_critica');
 const mais_info = document.getElementById("mais_info");
 const filme_escolhido = document.getElementById("filme_escolhido_conteudo");
+const grandeLucro = document.getElementById('filmes_grande_lucro');
 
-
-$(document).ready(function abrir_portal_de_filmes(){
-    if((window.location.href) == "http://127.0.0.1:5501/portal_de_filmes.html"){
-        pegar_filmes_lancamentos("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&primary_release_year=2021&with_watch_monetization_types=flatrate");
-        pegar_filmes_aclamados_pela_critica("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
-        pegar_filmes_populares("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
-    }
-});
-
+//Chamada das funções para colocar filmes nos posteres
+pegar_filmes_lancamentos("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&primary_release_year=2021&with_watch_monetization_types=flatrate");
+pegar_filmes_aclamados_pela_critica("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+pegar_filmes_populares("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate");
+pegar_filmes_grande_lucro("https://api.themoviedb.org/3/discover/movie?api_key=4aec08d6a063f531b3aa5dfd47796e60&language=pt-br&sort_by=revenue.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate");
 
 //filmes lançamentos
 function pegar_filmes_lancamentos(url){
@@ -90,6 +87,30 @@ function mostrar_filmes_populares(data){
     })
 }
 
+//grande lucro
+function pegar_filmes_grande_lucro(url){
+    fetch(url).then(res => res.json()).then(data => {
+        console.log(data.results);
+     mostrar_filmes_grande_lucro(data.results);
+    })
+}
+function mostrar_filmes_grande_lucro(data){
+    grandeLucro.innerHTML = '';
+
+    data.forEach(movie => {
+        const{poster_path, id} = movie;
+        const movieEl = document.createElement(`div`);
+        movieEl.classList.add('item');
+        movieEl.innerHTML = `
+        <div class="pad15">
+            <img src="${IMG_URL + poster_path}" alt="" id = "${id}" onclick="clicar_filme_poster(id)">
+        </div>
+        `
+        grandeLucro.appendChild(movieEl);
+        
+    })
+}
+
 
 //pop-up texto posters
 function clicar_filme_poster(id){
@@ -141,12 +162,6 @@ function passar_id(id){
     var id_filme = id;
     localStorage.setItem('id_do_filme', id_filme);
 }
-
-//pagina filme escolhido
-
-
-
-
 
 
 // carrousel filmes

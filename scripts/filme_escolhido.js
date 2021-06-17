@@ -1,9 +1,5 @@
 const API_KEY = '4aec08d6a063f531b3aa5dfd47796e60';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const populares = document.getElementById('filmes_populares');
-const lancamentos = document.getElementById('filmes_lancamentos');
-const aclamados_criticas = document.getElementById('filmes_aclamados_pela_critica');
-const mais_info = document.getElementById("mais_info");
 const filme_escolhido = document.getElementById("filme_escolhido_conteudo");
 
 pegar_id();
@@ -35,7 +31,7 @@ function mostrar_filme_escolhido(data){
             <div class="col-12 titulo">
                 <h1>${data.title}</h1>
             </div>
-            <div class="col-12 col-sm-5 info">
+            <div class="col-12 col-sm-4 info">
                 <div class="row poster">
                     <img src="${IMG_URL + data.poster_path}" alt="">
                 </div>
